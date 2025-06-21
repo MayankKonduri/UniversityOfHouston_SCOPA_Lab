@@ -12,7 +12,7 @@ For detailed notes, please refer to the [Project Notes Document](https://docs.go
 
 ### Overview
 
-We aim to estimate model parameters (such as the diffusion coefficient \( \alpha \)) from noisy observations of the solution to a PDE (e.g., tumor cell density at time \( t = 1 \)). This is framed as an inverse problem using a physics-informed machine learning approach.
+We aim to estimate model parameters (such as the diffusion coefficient α) from noisy observations of the solution to a PDE (e.g., tumor cell density at time t = 1). This is framed as an inverse problem using a physics-informed machine learning approach.
 
 ### Key Features
 - Solves a reaction-diffusion PDE with Neumann boundary conditions
@@ -22,10 +22,9 @@ We aim to estimate model parameters (such as the diffusion coefficient \( \alpha
 ### Mathematical Formulation
 
 The total loss combines:
-- **Parameter loss**: \( \frac{1}{2} \| \Gamma^{-1/2} (\alpha_{\text{true}} - \alpha_{\text{pred}}) \|^2 \)
-- **Data loss**: \( \frac{\lambda}{2} \| \Lambda^{-1/2} (u_{\text{true}}(t=1) - u_{\text{pred}}(t=1)) \|^2 \)
+- **Parameter loss**: (1/2) * ‖Γ^(-1/2) (α_true − α_pred)‖²
+- **Data loss**: (λ/2) * ‖Λ^(-1/2) (u_true(t=1) − u_pred(t=1))‖²
 
----
 
 ## Code Structure
 
