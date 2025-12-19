@@ -68,3 +68,5 @@ The total loss combines:
 ## Acknowledgments
 
 This work is conducted under the supervision of Prof. Andreas Mang. The code structure and PDE formulation are based on collaborative research efforts in scientific machine learning and biomedical modeling.
+
+This project is funded by **NSF CAREER Award #2145845:** *Scalable Algorithms for Nonlinear, Large-Scale Inverse Problems Governed by Dynamical Systems*.
