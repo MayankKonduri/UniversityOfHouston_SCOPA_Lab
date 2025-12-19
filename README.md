@@ -12,76 +12,65 @@ For detailed notes, please refer to the [Project Notes Document](https://docs.go
 
 ### Overview
 
-We aim to estimate model parameters (such as the diffusion coefficient α) from noisy observations of the solution to a PDE (e.g., tumor cell density at time t = 1). This is framed as an inverse problem using a physics-informed machine learning approach.
+We aim to estimate model parameters (such as the diffusion coefficient $\alpha$) from noisy observations of the solution to a PDE (e.g., tumor cell density at time $t = 1$). This is framed as an inverse problem using a physics-informed machine learning approach.
 
 ### Key Features
 - Solves a reaction–diffusion PDE with Neumann boundary conditions
 - Combines data-driven and model-based approaches
 - Custom loss function including parameter loss and forward consistency loss
 
+---
+
 ### Mathematical Formulation
 
 #### Forward Problem
 
 We consider the semi-linear parabolic PDE
+$$
+\partial_t u(x,t)
+- \nabla \cdot \big( \tilde{\alpha}(x)\nabla u(x,t) \big)
++ \tilde{\rho}(x)\,u(x,t)\bigl(1-u(x,t)\bigr)
+= 0,
+$$
 
-\[
-\partial_t u(x,t) - \nabla \cdot \big( \tilde{\alpha}(x)\nabla u(x,t) \big)
-+ \tilde{\rho}(x)\,u(x,t)\big(1 - u(x,t)\big) = 0,
-\]
-
-for \((x,t) \in (0,1] \times \Omega_B\), with initial condition
-
-\[
+for $(x,t) \in \Omega_B \times (0,1]$, with initial condition
+$$
 u(x,0) = u_0(x), \quad x \in \Omega_B,
-\]
-
+$$
 and Neumann boundary conditions
+$$
+\partial_n u = 0 \quad \text{on } \partial\Omega_B \times (0,1].
+$$
 
-\[
-\partial_n u = 0 \quad \text{on } (0,1] \times \partial \Omega_B.
-\]
+Here, $\Omega_B \subset \mathbb{R}^d$, $d \in \{1,2,3\}$, denotes the brain domain.
 
-Here, \(\Omega_B \subset \mathbb{R}^d\), \(d \in \{1,2,3\}\), denotes the brain domain with boundary \(\partial \Omega_B\).
-
-The model consists of two terms. The first term models tissue-dependent migration of tumor cells through the diffusion coefficient
-\[
-\tilde{\alpha} : \Omega_B \rightarrow \mathbb{R},
-\]
-which is defined as
-\[
+The spatially varying diffusion coefficient is modeled as
+$$
 \tilde{\alpha}(x) = \alpha\,\pi_W(x) + 0.2\,\alpha\,\pi_G(x),
-\]
-where \(\alpha > 0\) is a scalar parameter. The functions
-\[
-\pi_W : \Omega_B \rightarrow [0,1], \quad
-\pi_G : \Omega_B \rightarrow [0,1]
-\]
-denote probability maps for white matter and gray matter, respectively.
+$$
+where $\alpha > 0$ is a scalar parameter, and $\pi_W,\pi_G : \Omega_B \to [0,1]$ denote probability maps for white matter and gray matter, respectively.
 
-The second term represents nonlinear tumor cell proliferation controlled by the tissue-dependent reaction coefficient
-\[
-\tilde{\rho} : \Omega_B \rightarrow \mathbb{R},
-\]
-given by
-\[
+The proliferation term is given by
+$$
 \tilde{\rho}(x) = \rho\,\pi_W(x) + 0.2\,\rho\,\pi_G(x),
-\]
-where \(\rho > 0\) is a scalar proliferation parameter.
+$$
+with scalar proliferation rate $\rho > 0$.
 
-The tissue probability maps \(\pi_j\), \(j \in \{W, G\}\), are obtained from the ICBM MNI dataset.
+The tissue probability maps $\pi_j$, $j \in \{W,G\}$, are obtained from the ICBM MNI dataset.
 
 #### Inverse Problem and Loss Function
 
+The inverse problem consists of estimating parameters (e.g., $\alpha$) from observations of the state $u$ at final time $t=1$.
+
 The total loss combines:
-- **Parameter loss**:  
-  \[
-  \frac{1}{2}\,\|\Gamma^{-1/2}(\alpha_{\text{true}} - \alpha_{\text{pred}})\|^2
-  \]
-- **Data loss**:  
-  \[
-  \frac{\lambda}{2}\,\|\Lambda^{-1/2}(u_{\text{true}}(t=1) - u_{\text{pred}}(t=1))\|^2
-  \]
+- **Parameter loss**
+$$
+\frac{1}{2}\,\bigl\|\Gamma^{-1/2}(\alpha_{\text{true}}-\alpha_{\text{pred}})\bigr\|^2
+$$
+- **Data loss**
+$$
+\frac{\lambda}{2}\,\bigl\|\Lambda^{-1/2}\bigl(u_{\text{true}}(t=1)-u_{\text{pred}}(t=1)\bigr)\bigr\|^2
+$$
 
 ---
 
@@ -101,8 +90,8 @@ The total loss combines:
 
 ## Training Details
 
-- **Input**: u(t = 1)
-- **Output**: Predicted α
+- **Input**: $u(t = 1)$
+- **Output**: Predicted $\alpha$
 - **Loss**: Combination of parameter and data loss
 - **Optimizer**: Adam
 - **Batch Size**: 8 (configurable)
@@ -112,11 +101,11 @@ The total loss combines:
 
 ## Results
 
-[Download SIAM '24 @ Baylor University Poster PDF](https://github.com/user-attachments/files/17637383/mayank_sciml_poster.pdf) ..
+[Download SIAM '24 @ Baylor University Poster PDF](https://github.com/user-attachments/files/17637383/mayank_sciml_poster.pdf)
 
 ![SIAM '24 @ Baylor University](https://github.com/user-attachments/assets/c0e91500-fb08-4c13-b943-b32e09cbe005)
 
-[Download SIAM '25 @ Oden Institute Poster PDF](https://github.com/user-attachments/files/24265389/Mayank_SIAM.25_Poster.pdf) ..
+[Download SIAM '25 @ Oden Institute Poster PDF](https://github.com/user-attachments/files/24265389/Mayank_SIAM.25_Poster.pdf)
 
 ![SIAM '25 @ Oden Institute](https://github.com/user-attachments/assets/56993617-650e-47dd-9da7-898a53fe37b4)
 
