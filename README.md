@@ -21,9 +21,67 @@ We aim to estimate model parameters (such as the diffusion coefficient α) from 
 
 ### Mathematical Formulation
 
+#### Forward Problem
+
+We consider the semi-linear parabolic PDE
+
+\[
+\partial_t u(x,t) - \nabla \cdot \big( \tilde{\alpha}(x)\nabla u(x,t) \big)
++ \tilde{\rho}(x)\,u(x,t)\big(1 - u(x,t)\big) = 0,
+\]
+
+for \((x,t) \in (0,1] \times \Omega_B\), with initial condition
+
+\[
+u(x,0) = u_0(x), \quad x \in \Omega_B,
+\]
+
+and Neumann boundary conditions
+
+\[
+\partial_n u = 0 \quad \text{on } (0,1] \times \partial \Omega_B.
+\]
+
+Here, \(\Omega_B \subset \mathbb{R}^d\), \(d \in \{1,2,3\}\), denotes the brain domain with boundary \(\partial \Omega_B\).
+
+The model consists of two terms. The first term models tissue-dependent migration of tumor cells through the diffusion coefficient
+\[
+\tilde{\alpha} : \Omega_B \rightarrow \mathbb{R},
+\]
+which is defined as
+\[
+\tilde{\alpha}(x) = \alpha\,\pi_W(x) + 0.2\,\alpha\,\pi_G(x),
+\]
+where \(\alpha > 0\) is a scalar parameter. The functions
+\[
+\pi_W : \Omega_B \rightarrow [0,1], \quad
+\pi_G : \Omega_B \rightarrow [0,1]
+\]
+denote probability maps for white matter and gray matter, respectively.
+
+The second term represents nonlinear tumor cell proliferation controlled by the tissue-dependent reaction coefficient
+\[
+\tilde{\rho} : \Omega_B \rightarrow \mathbb{R},
+\]
+given by
+\[
+\tilde{\rho}(x) = \rho\,\pi_W(x) + 0.2\,\rho\,\pi_G(x),
+\]
+where \(\rho > 0\) is a scalar proliferation parameter.
+
+The tissue probability maps \(\pi_j\), \(j \in \{W, G\}\), are obtained from the ICBM MNI dataset.
+
+#### Inverse Problem and Loss Function
+
 The total loss combines:
-- **Parameter loss**: (1/2) · ‖Γ⁻¹ᐟ² (α_true − α_pred)‖²
-- **Data loss**: (λ/2) · ‖Λ⁻¹ᐟ² (u_true(t = 1) − u_pred(t = 1))‖²
+- **Parameter loss**:  
+  \[
+  \frac{1}{2}\,\|\Gamma^{-1/2}(\alpha_{\text{true}} - \alpha_{\text{pred}})\|^2
+  \]
+- **Data loss**:  
+  \[
+  \frac{\lambda}{2}\,\|\Lambda^{-1/2}(u_{\text{true}}(t=1) - u_{\text{pred}}(t=1))\|^2
+  \]
 
 ---
 
@@ -58,14 +116,9 @@ The total loss combines:
 
 ![SIAM '24 @ Baylor University](https://github.com/user-attachments/assets/c0e91500-fb08-4c13-b943-b32e09cbe005)
 
-
-
-
 [Download SIAM '25 @ Oden Institute Poster PDF](https://github.com/user-attachments/files/24265389/Mayank_SIAM.25_Poster.pdf) ..
 
 ![SIAM '25 @ Oden Institute](https://github.com/user-attachments/assets/56993617-650e-47dd-9da7-898a53fe37b4)
-
-
 
 ---
 
