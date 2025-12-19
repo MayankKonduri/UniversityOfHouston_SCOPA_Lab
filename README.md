@@ -29,7 +29,7 @@ We consider the semi-linear parabolic PDE
 $$
 \partial_t u(x,t)
 - \nabla \cdot \big( \tilde{\alpha}(x)\nabla u(x,t) \big)
-+ \tilde{\rho}(x)\,u(x,t)\bigl(1-u(x,t)\bigr)
++ \tilde{\rho}(x)\,u(x,t)\big(1-u(x,t)\big)
 = 0,
 $$
 
@@ -48,7 +48,9 @@ The spatially varying diffusion coefficient is modeled as
 $$
 \tilde{\alpha}(x) = \alpha\,\pi_W(x) + 0.2\,\alpha\,\pi_G(x),
 $$
-where $\alpha > 0$ is a scalar parameter, and $\pi_W,\pi_G : \Omega_B \to [0,1]$ denote probability maps for white matter and gray matter, respectively.
+where $\alpha > 0$ is a scalar parameter, and
+$\pi_W, \pi_G : \Omega_B \to [0,1]$
+denote probability maps for white matter and gray matter, respectively.
 
 The proliferation term is given by
 $$
@@ -60,16 +62,19 @@ The tissue probability maps $\pi_j$, $j \in \{W,G\}$, are obtained from the ICBM
 
 #### Inverse Problem and Loss Function
 
-The inverse problem consists of estimating parameters (e.g., $\alpha$) from observations of the state $u$ at final time $t=1$.
+The inverse problem consists of estimating parameters (e.g., $\alpha$)
+from observations of the state $u$ at final time $t = 1$.
 
 The total loss combines:
+
 - **Parameter loss**
 $$
-\frac{1}{2}\,\bigl\|\Gamma^{-1/2}(\alpha_{\text{true}}-\alpha_{\text{pred}})\bigr\|^2
+\frac{1}{2}\,\big\|\Gamma^{-1/2}(\alpha_{\text{true}} - \alpha_{\text{pred}})\big\|^2
 $$
+
 - **Data loss**
 $$
-\frac{\lambda}{2}\,\bigl\|\Lambda^{-1/2}\bigl(u_{\text{true}}(t=1)-u_{\text{pred}}(t=1)\bigr)\bigr\|^2
+\frac{\lambda}{2}\,\big\|\Lambda^{-1/2}\big(u_{\text{true}}(t=1) - u_{\text{pred}}(t=1)\big)\big\|^2
 $$
 
 ---
