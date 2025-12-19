@@ -15,23 +15,24 @@ For detailed notes, please refer to the [Project Notes Document](https://docs.go
 We aim to estimate model parameters (such as the diffusion coefficient α) from noisy observations of the solution to a PDE (e.g., tumor cell density at time t = 1). This is framed as an inverse problem using a physics-informed machine learning approach.
 
 ### Key Features
-- Solves a reaction-diffusion PDE with Neumann boundary conditions
+- Solves a reaction–diffusion PDE with Neumann boundary conditions
 - Combines data-driven and model-based approaches
 - Custom loss function including parameter loss and forward consistency loss
 
 ### Mathematical Formulation
 
 The total loss combines:
-- **Parameter loss**: (1/2) * ‖Γ^(-1/2) (α_true − α_pred)‖²
-- **Data loss**: (λ/2) * ‖Λ^(-1/2) (u_true(t=1) − u_pred(t=1))‖²
+- **Parameter loss**: (1/2) · ‖Γ⁻¹ᐟ² (α_true − α_pred)‖²
+- **Data loss**: (λ/2) · ‖Λ⁻¹ᐟ² (u_true(t = 1) − u_pred(t = 1))‖²
 
+---
 
 ## Code Structure
 
 | File | Description |
 |------|-------------|
 | `genNNData.py` | Generates training/test data using the PDE solver |
-| `RDPDE.py` | Implements the PDE forward solver with Crank-Nicholson and analytical reaction steps |
+| `RDPDE.py` | Implements the PDE forward solver with Crank–Nicolson and analytical reaction steps |
 | `run_DNN_MC.py` | Trains the NN with custom loss (parameter + forward consistency) |
 | `run_DNN.py` | Trains the NN with only parameter loss |
 | `SetupNN.py` | Functions for data handling and network construction |
@@ -42,8 +43,8 @@ The total loss combines:
 
 ## Training Details
 
-- **Input**: \( u(t=1) \)
-- **Output**: Predicted \( \alpha \)
+- **Input**: u(t = 1)
+- **Output**: Predicted α
 - **Loss**: Combination of parameter and data loss
 - **Optimizer**: Adam
 - **Batch Size**: 8 (configurable)
@@ -61,7 +62,7 @@ The total loss combines:
 
 ## References
 
-[1] Mang, A., Gholami, A., & Biros, G. (1996). *An inverse problem formulation for parameter estimation of a reaction-diffusion model for low-grade gliomas*. Journal of Mathematical Biology, 72(1), 409–433.
+[1] Mang, A., Gholami, A., & Biros, G. (1996). *An inverse problem formulation for parameter estimation of a reaction–diffusion model for low-grade gliomas*. Journal of Mathematical Biology, 72(1), 409–433.
 
 ---
 
