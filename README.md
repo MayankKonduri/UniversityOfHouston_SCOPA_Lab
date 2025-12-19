@@ -21,61 +21,53 @@ We aim to estimate model parameters (such as the diffusion coefficient $\alpha$)
 
 ---
 
-### Mathematical Formulation
+## Mathematical Formulation
 
-#### Forward Problem
+### Forward Problem
 
 We consider the semi-linear parabolic PDE
-$$
-\partial_t u(x,t)
-- \nabla \cdot \big( \tilde{\alpha}(x)\nabla u(x,t) \big)
-+ \tilde{\rho}(x)\,u(x,t)\big(1-u(x,t)\big)
-= 0,
-$$
 
-for $(x,t) \in \Omega_B \times (0,1]$, with initial condition
-$$
-u(x,0) = u_0(x), \quad x \in \Omega_B,
-$$
+    ∂u/∂t − ∇ · ( α̃(x) ∇u(x,t) ) + ρ̃(x) u(x,t) (1 − u(x,t)) = 0
+
+for (x,t) in Ω_B × (0,1], with initial condition
+
+    u(x,0) = u_0(x),   x in Ω_B
+
 and Neumann boundary conditions
-$$
-\partial_n u = 0 \quad \text{on } \partial\Omega_B \times (0,1].
-$$
 
-Here, $\Omega_B \subset \mathbb{R}^d$, $d \in \{1,2,3\}$, denotes the brain domain.
+    ∂u/∂n = 0   on ∂Ω_B × (0,1].
+
+Here, Ω_B ⊂ R^d, with d = 1, 2, or 3, denotes the brain domain.
 
 The spatially varying diffusion coefficient is modeled as
-$$
-\tilde{\alpha}(x) = \alpha\,\pi_W(x) + 0.2\,\alpha\,\pi_G(x),
-$$
-where $\alpha > 0$ is a scalar parameter, and
-$\pi_W, \pi_G : \Omega_B \to [0,1]$
-denote probability maps for white matter and gray matter, respectively.
+
+    α̃(x) = α · π_W(x) + 0.2 · α · π_G(x),
+
+where α > 0 is a scalar parameter. The functions π_W and π_G map Ω_B to [0,1] and represent probability maps for white matter and gray matter, respectively.
 
 The proliferation term is given by
-$$
-\tilde{\rho}(x) = \rho\,\pi_W(x) + 0.2\,\rho\,\pi_G(x),
-$$
-with scalar proliferation rate $\rho > 0$.
 
-The tissue probability maps $\pi_j$, $j \in \{W,G\}$, are obtained from the ICBM MNI dataset.
+    ρ̃(x) = ρ · π_W(x) + 0.2 · ρ · π_G(x),
 
-#### Inverse Problem and Loss Function
+with scalar proliferation rate ρ > 0.
 
-The inverse problem consists of estimating parameters (e.g., $\alpha$)
-from observations of the state $u$ at final time $t = 1$.
+The tissue probability maps π_j, for j in {W, G}, are obtained from the ICBM MNI dataset.
+
+---
+
+### Inverse Problem and Loss Function
+
+The inverse problem consists of estimating parameters (e.g., α) from observations of the state u at final time t = 1.
 
 The total loss combines:
 
 - **Parameter loss**
-$$
-\frac{1}{2}\,\big\|\Gamma^{-1/2}(\alpha_{\text{true}} - \alpha_{\text{pred}})\big\|^2
-$$
+
+        (1/2) · || Γ^(−1/2) (α_true − α_pred) ||^2
 
 - **Data loss**
-$$
-\frac{\lambda}{2}\,\big\|\Lambda^{-1/2}\big(u_{\text{true}}(t=1) - u_{\text{pred}}(t=1)\big)\big\|^2
-$$
+
+        (λ/2) · || Λ^(−1/2) (u_true(t=1) − u_pred(t=1)) ||^2
 
 ---
 
