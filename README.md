@@ -27,47 +27,51 @@ We aim to estimate model parameters (such as the diffusion coefficient $\alpha$)
 
 We consider the semi-linear parabolic PDE
 
-    ∂u/∂t − ∇ · ( α̃(x) ∇u(x,t) ) + ρ̃(x) u(x,t) (1 − u(x,t)) = 0
+du/dt − div( alpha_tilde(x) · grad u(x,t) )
+        + rho_tilde(x) · u(x,t) · (1 − u(x,t)) = 0
 
-for (x,t) in Ω_B × (0,1], with initial condition
+for (x, t) in Omega_B × (0, 1], with initial condition
 
-    u(x,0) = u_0(x),   x in Ω_B
+u(x, 0) = u_0(x),   x in Omega_B,
 
 and Neumann boundary conditions
 
-    ∂u/∂n = 0   on ∂Ω_B × (0,1].
+∂u/∂n = 0   on ∂Omega_B × (0, 1].
 
-Here, Ω_B ⊂ R^d, with d = 1, 2, or 3, denotes the brain domain.
+Here, Omega_B ⊂ R^d, with d ∈ {1, 2, 3}, denotes the brain domain.
 
 The spatially varying diffusion coefficient is modeled as
 
-    α̃(x) = α · π_W(x) + 0.2 · α · π_G(x),
+alpha_tilde(x) = alpha · pi_W(x) + 0.2 · alpha · pi_G(x),
 
-where α > 0 is a scalar parameter. The functions π_W and π_G map Ω_B to [0,1] and represent probability maps for white matter and gray matter, respectively.
+where alpha > 0 is a scalar parameter, and pi_W, pi_G : Omega_B → [0, 1]
+denote probability maps for white matter and gray matter, respectively.
 
 The proliferation term is given by
 
-    ρ̃(x) = ρ · π_W(x) + 0.2 · ρ · π_G(x),
+rho_tilde(x) = rho · pi_W(x) + 0.2 · rho · pi_G(x),
 
-with scalar proliferation rate ρ > 0.
+with scalar proliferation rate rho > 0.
 
-The tissue probability maps π_j, for j in {W, G}, are obtained from the ICBM MNI dataset.
+The tissue probability maps pi_j, j ∈ {W, G}, are obtained from the ICBM MNI dataset.
 
 ---
 
 ### Inverse Problem and Loss Function
 
-The inverse problem consists of estimating parameters (e.g., α) from observations of the state u at final time t = 1.
+The inverse problem consists of estimating parameters (e.g., alpha)
+from observations of the state u at final time t = 1.
 
 The total loss combines:
 
 - **Parameter loss**
 
-        (1/2) · || Γ^(−1/2) (α_true − α_pred) ||^2
+  (1/2) · || Gamma^(-1/2) · (alpha_true − alpha_pred) ||^2
 
 - **Data loss**
 
-        (λ/2) · || Λ^(−1/2) (u_true(t=1) − u_pred(t=1)) ||^2
+  (lambda/2) · || Lambda^(-1/2) · (u_true(t=1) − u_pred(t=1)) ||^2
+
 
 ---
 
