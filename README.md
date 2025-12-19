@@ -54,16 +54,17 @@ The total loss combines:
 
 ## Results
 
+[Download SIAM '24 @ Baylor University Poster PDF](https://github.com/user-attachments/files/17637383/mayank_sciml_poster.pdf) ..
+
 ![SIAM '24 @ Baylor University](https://github.com/user-attachments/assets/c0e91500-fb08-4c13-b943-b32e09cbe005)
 
-[Download SIAM '24 @ Baylor University Poster PDF](https://github.com/user-attachments/files/17637383/mayank_sciml_poster.pdf)
 
 
 
+[Download SIAM '25 @ Oden Institute Poster PDF](https://github.com/user-attachments/files/24265389/Mayank_SIAM.25_Poster.pdf) ..
 
 ![SIAM '25 @ Oden Institute](https://github.com/user-attachments/assets/56993617-650e-47dd-9da7-898a53fe37b4)
 
-[Download SIAM '25 @ Oden Institute Poster PDF](https://github.com/user-attachments/files/24265389/Mayank_SIAM.25_Poster.pdf)
 
 
 ---
