@@ -10,7 +10,7 @@
   <img src="https://img.shields.io/badge/SciPy-Sparse_Solvers-8CAAE6?style=for-the-badge&logo=scipy&logoColor=white" alt="SciPy" />
   <img src="https://img.shields.io/badge/NumPy-Arrays-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy" />
 </p>
-
+ 
 <p>
   <img src="https://img.shields.io/badge/domain-1D_prototype-blue?style=flat-square" alt="Domain" />
   <img src="https://img.shields.io/badge/samples-10,000-informational?style=flat-square" alt="Samples" />
