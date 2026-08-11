@@ -263,25 +263,6 @@ source .venv/bin/activate          # Windows: .venv\Scripts\Activate.ps1
 pip install numpy scipy matplotlib tensorflow
 ```
 
-> [!WARNING]
-> Before running either training script, **edit the hardcoded `path` variable
-> at the top** — see [Known Issues](#-known-issues). As committed, both scripts
-> write checkpoints to an absolute path on another machine and will fail.
-
-```bash
-# Sanity check: forward solve, no ML
-python xmpls/solRDPDE1D.py
-
-# Inspect the shipped dataset
-python viz_data.py
-
-# Train (dataset already committed — regeneration is optional)
-python run_DNN.py
-
-# Regenerate data from scratch (~10k PDE solves, slow)
-python genNNData.py
-```
-
 <details>
 <summary><b>Generating the noisy datasets</b></summary>
 
